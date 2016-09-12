@@ -27,4 +27,13 @@ public class TaxiTest {
         assertEquals((Float) 6F, taxi.calculateFee(2F));
     }
 
+    @Test
+    public void priceOf3KMShouldBe6dot8() {
+        assertEquals((Float) 6.8F, taxi.calculateFee(3F));
+    }
+
+    @Test
+    public void priceOf7KMShouldBe10() {
+        assertEquals((Float) 10F, taxi.calculateFee(7F));
+    }
 }
