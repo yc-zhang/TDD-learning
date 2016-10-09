@@ -1,13 +1,18 @@
 package lesson2.model;
 
-public class LengthValue extends FormularEntity {
-    private final LengthUnit lengthUnit;
-    private final Double displayValue;
-    private final Double value;
+import static lesson2.model.LengthUnit.*;
 
-    public LengthValue(LengthUnit lengthUnit, Double displayValue) {
+public class LengthValue {
+    private final LengthUnit lengthUnit;
+    private final double value;
+
+    public LengthValue(double value) {
+        this.value = value;
+        this.lengthUnit = MM;
+    }
+
+    public LengthValue(LengthUnit lengthUnit, double displayValue) {
         this.lengthUnit = lengthUnit;
-        this.displayValue = displayValue;
         switch (lengthUnit) {
             case MM:
                 this.value = displayValue;
@@ -27,11 +32,25 @@ public class LengthValue extends FormularEntity {
         return lengthUnit;
     }
 
-    public Double getDisplayValue() {
-        return displayValue;
+    public double getValue() {
+        return value;
     }
 
-    public Double getValue() {
-        return value;
+    @Override
+    public String toString() {
+        return toString(this.lengthUnit);
+    }
+
+    public String toString(LengthUnit unit) {
+        switch (unit) {
+            case MM:
+                return this.value + unit.toString();
+            case CM:
+                return this.value / 10 + unit.toString();
+            case M:
+                return this.value / 1000 + unit.toString();
+            default:
+                return this.value + unit.toString();
+        }
     }
 }
