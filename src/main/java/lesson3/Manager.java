@@ -5,7 +5,7 @@ import lesson3.exceptions.WaiterNotFoundException;
 
 import java.util.List;
 
-public class Manager extends SmartWaiter implements ParkingService {
+public class Manager extends SmartWaiter {
 
     private List<Waiter> waiters;
 
@@ -14,7 +14,7 @@ public class Manager extends SmartWaiter implements ParkingService {
         this.waiters = waiters;
     }
 
-    public void parkByWaiter(Car car, ParkingService waiter) throws FullException, WaiterNotFoundException {
+    public void parkByWaiter(Car car, Waiter waiter) throws FullException, WaiterNotFoundException {
         if (waiters.contains(waiter)) {
             waiter.park(car);
         } else {

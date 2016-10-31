@@ -47,4 +47,8 @@ public class ParkingLot implements ParkingService {
     public String getReport() {
         return "ParkingLot Size: " + size + ", Free Count: " + getFreeCount();
     }
+
+    protected List<Car> getCarList() {
+        return cars;
+    }
 }

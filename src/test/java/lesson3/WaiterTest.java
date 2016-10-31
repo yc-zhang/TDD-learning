@@ -28,6 +28,7 @@ public class WaiterTest {
     public void shouldParkCar() throws Exception {
         Car car = new Car("1");
         waiter.park(car);
+        assertTrue(p1.contains(car));
     }
 
     @Test(expected = FullException.class)
@@ -45,6 +46,7 @@ public class WaiterTest {
         Car car1 = new Car("1");
         p1.park(car1);
         waiter.fetch(car1);
+        assertFalse(p1.contains(car1));
     }
 
     @Test(expected = CarNotFoundException.class)

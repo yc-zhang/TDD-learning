@@ -5,9 +5,9 @@ import lesson3.exceptions.FullException;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertTrue;
+import java.util.List;
+
+import static junit.framework.TestCase.*;
 
 public class ParkingLotTest {
     private ParkingLot parkingLot;
@@ -21,6 +21,9 @@ public class ParkingLotTest {
     public void shouldParkCar() throws Exception {
         Car car = new Car("1");
         parkingLot.park(car);
+        List<Car> carList = parkingLot.getCarList();
+        assertEquals(1, carList.size());
+        assertSame(car, carList.get(0));
     }
 
     @Test(expected = FullException.class)
@@ -35,6 +38,7 @@ public class ParkingLotTest {
         Car car1 = new Car("1");
         parkingLot.park(car1);
         parkingLot.fetch(car1);
+        assertEquals(0, parkingLot.getCarList().size());
     }
 
     @Test(expected = CarNotFoundException.class)

@@ -4,7 +4,6 @@ import lesson3.exceptions.CarNotFoundException;
 import lesson3.exceptions.FullException;
 
 import java.util.List;
-import java.util.Optional;
 
 public class Waiter implements ParkingService {
     protected List<ParkingLot> parkingLots;
@@ -16,29 +15,20 @@ public class Waiter implements ParkingService {
 
     @Override
     public void park(Car car) throws FullException {
-        Optional<ParkingLot> park = parkingLots.stream().filter(x -> x.getFreeCount() > 0)
-                .findFirst();
-        if (park.isPresent()) {
-            park.get().park(car);
-        } else {
-            throw new FullException();
-        }
+        parkingLots.stream().filter(x -> x.getFreeCount() > 0)
+                .findFirst().orElseThrow(FullException::new).park(car);
     }
 
     @Override
     public void fetch(Car car) throws CarNotFoundException {
-        Optional<ParkingLot> park = parkingLots.stream().filter(x -> x.contains(car))
-                .findFirst();
-        if (park.isPresent()) {
-            park.get().fetch(car);
-        } else {
-            throw new CarNotFoundException();
-        }
+        parkingLots.stream().filter(x -> x.contains(car))
+                .findFirst()
+                .orElseThrow(CarNotFoundException::new).fetch(car);
     }
 
     @Override
     public boolean contains(Car car) {
-        return parkingLots.stream().anyMatch(parkingService -> parkingService.contains(car));
+        return parkingLots.stream().anyMatch(parkingLot -> parkingLot.contains(car));
     }
 
     @Override
