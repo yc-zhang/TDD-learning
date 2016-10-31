@@ -10,5 +10,7 @@ public interface ParkingService {
 
     boolean contains(Car car);
 
-    int freeCount();
+    int getFreeCount();
+
+    String report();
 }

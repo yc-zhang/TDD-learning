@@ -17,7 +17,7 @@ public class ParkingLot implements ParkingService {
 
     @Override
     public void park(Car car) throws FullException {
-        if (freeCount() > 0)  {
+        if (getFreeCount() > 0)  {
             this.cars.add(car);
         } else {
             throw new FullException();
@@ -39,7 +39,12 @@ public class ParkingLot implements ParkingService {
     }
 
     @Override
-    public int freeCount() {
+    public int getFreeCount() {
         return this.size - cars.size();
+    }
+
+    @Override
+    public String report() {
+        return "ParkingLot Size: " + size + ", Free Count: " + getFreeCount();
     }
 }

@@ -7,15 +7,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class Waiter implements ParkingService {
-    protected List<ParkingService> parkingServices;
-
-    public Waiter(List<ParkingService> parkingServices) {
-        this.parkingServices = parkingServices;
+    protected List<ParkingLot> parkingLots;
+    protected String name;
+    public Waiter(String name, List<ParkingLot> parkingLots) {
+        this.name = name;
+        this.parkingLots = parkingLots;
     }
 
     @Override
     public void park(Car car) throws FullException {
-        Optional<ParkingService> park = parkingServices.stream().filter(x -> x.freeCount() > 0)
+        Optional<ParkingLot> park = parkingLots.stream().filter(x -> x.getFreeCount() > 0)
                 .findFirst();
         if (park.isPresent()) {
             park.get().park(car);
@@ -26,7 +27,7 @@ public class Waiter implements ParkingService {
 
     @Override
     public void fetch(Car car) throws CarNotFoundException {
-        Optional<ParkingService> park = parkingServices.stream().filter(x -> x.contains(car))
+        Optional<ParkingLot> park = parkingLots.stream().filter(x -> x.contains(car))
                 .findFirst();
         if (park.isPresent()) {
             park.get().fetch(car);
@@ -37,13 +38,18 @@ public class Waiter implements ParkingService {
 
     @Override
     public boolean contains(Car car) {
-        return parkingServices.stream().anyMatch(parkingService -> parkingService.contains(car));
+        return parkingLots.stream().anyMatch(parkingService -> parkingService.contains(car));
     }
 
     @Override
-    public int freeCount() {
-        parkingServices.stream().map(ParkingService::freeCount).reduce(0, (a, b) -> a + b);
-        return parkingServices.stream().mapToInt(ParkingService::freeCount).sum();
+    public int getFreeCount() {
+        return parkingLots.stream().mapToInt(ParkingService::getFreeCount).sum();
     }
 
+    @Override
+    public String report() {
+        String report = parkingLots.stream().map(ParkingLot::report).reduce("", (a, b) -> a + "\n\t\t" + b);
+        return "Name: " + name + ", Count of ParkingLot: " + parkingLots.size() + ", Total FreeCount: " + getFreeCount()
+                + "\n\t" + "Embedded ParkingLot Reports: " + report;
+    }
 }

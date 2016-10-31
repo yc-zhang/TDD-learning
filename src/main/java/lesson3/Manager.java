@@ -7,14 +7,14 @@ import java.util.List;
 
 public class Manager extends SmartWaiter implements ParkingService {
 
-    private List<ParkingService> waiters;
+    private List<Waiter> waiters;
 
-    public Manager(List<ParkingService> parkingServices, List<ParkingService> waiters) {
-        super(parkingServices);
+    public Manager(String name, List<ParkingLot> parkingLots, List<Waiter> waiters) {
+        super(name, parkingLots);
         this.waiters = waiters;
     }
 
-    public void parkByWaiter(Car car, Waiter waiter) throws FullException, WaiterNotFoundException {
+    public void parkByWaiter(Car car, ParkingService waiter) throws FullException, WaiterNotFoundException {
         if (waiters.contains(waiter)) {
             waiter.park(car);
         } else {
@@ -22,7 +22,9 @@ public class Manager extends SmartWaiter implements ParkingService {
         }
     }
 
-    public List<ParkingService> getWaiters() {
-        return waiters;
+    public String report() {
+        String parkingLotReports = parkingLots.stream().map(ParkingLot::report).reduce("", (a, b) -> a + "\n\t" + b);
+        String waiterReports = waiters.stream().map(Waiter::report).reduce("", (a, b) -> a + "\n\t" + b);
+        return "Embedded ParkingLot Reports: " + parkingLotReports + "\n" + "Embedded Waiter Reports: " + waiterReports;
     }
 }

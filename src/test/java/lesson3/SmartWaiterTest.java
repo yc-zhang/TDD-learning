@@ -20,7 +20,7 @@ public class SmartWaiterTest {
         park1.park(new Car("2"));
         park2 = new ParkingLot(3);
         park2.park(new Car("3"));
-        smartWaiter = new SmartWaiter(Arrays.asList(park1, park2));
+        smartWaiter = new SmartWaiter("smart", Arrays.asList(park1, park2));
     }
 
     @Test

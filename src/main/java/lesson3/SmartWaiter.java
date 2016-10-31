@@ -7,13 +7,13 @@ import java.util.Optional;
 
 public class SmartWaiter extends Waiter implements ParkingService {
 
-    public SmartWaiter(List<ParkingService> parkingServices) {
-        super(parkingServices);
+    public SmartWaiter(String name, List<ParkingLot> parkingLots) {
+        super(name, parkingLots);
     }
 
     @Override
     public void park(Car car) throws FullException {
-        Optional<ParkingService> park = parkingServices.stream().max((a, b) -> a.freeCount() - b.freeCount());
+        Optional<ParkingLot> park = parkingLots.stream().max((a, b) -> a.getFreeCount() - b.getFreeCount());
         if (park.isPresent()) {
             park.get().park(car);
         } else {
