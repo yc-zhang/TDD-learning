@@ -76,6 +76,6 @@ public class WaiterTest {
                 "Name: waiter, Count of ParkingLot: 2, Total FreeCount: 2\n" +
                 "\tEmbedded ParkingLot Reports: \n" +
                 "\t\tParkingLot Size: 1, Free Count: 1\n" +
-                "\t\tParkingLot Size: 1, Free Count: 1", waiter.report());
+                "\t\tParkingLot Size: 1, Free Count: 1", waiter.getReport());
     }
 }

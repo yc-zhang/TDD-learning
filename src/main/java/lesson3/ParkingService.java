@@ -12,5 +12,5 @@ public interface ParkingService {
 
     int getFreeCount();
 
-    String report();
+    String getReport();
 }

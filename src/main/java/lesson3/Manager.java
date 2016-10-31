@@ -22,9 +22,9 @@ public class Manager extends SmartWaiter implements ParkingService {
         }
     }
 
-    public String report() {
-        String parkingLotReports = parkingLots.stream().map(ParkingLot::report).reduce("", (a, b) -> a + "\n\t" + b);
-        String waiterReports = waiters.stream().map(Waiter::report).reduce("", (a, b) -> a + "\n\t" + b);
+    public String getReport() {
+        String parkingLotReports = parkingLots.stream().map(ParkingLot::getReport).reduce("", (a, b) -> a + "\n\t" + b);
+        String waiterReports = waiters.stream().map(Waiter::getReport).reduce("", (a, b) -> a + "\n\t" + b);
         return "Embedded ParkingLot Reports: " + parkingLotReports + "\n" + "Embedded Waiter Reports: " + waiterReports;
     }
 }

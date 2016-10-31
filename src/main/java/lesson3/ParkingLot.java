@@ -44,7 +44,7 @@ public class ParkingLot implements ParkingService {
     }
 
     @Override
-    public String report() {
+    public String getReport() {
         return "ParkingLot Size: " + size + ", Free Count: " + getFreeCount();
     }
 }

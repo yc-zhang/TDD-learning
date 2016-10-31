@@ -61,6 +61,6 @@ public class ParkingLotTest {
 
     @Test
     public void shouldReturnReport() throws Exception {
-        assertEquals("ParkingLot Size: 2, Free Count: 2", parkingLot.report());
+        assertEquals("ParkingLot Size: 2, Free Count: 2", parkingLot.getReport());
     }
 }

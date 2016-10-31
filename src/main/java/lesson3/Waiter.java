@@ -47,8 +47,8 @@ public class Waiter implements ParkingService {
     }
 
     @Override
-    public String report() {
-        String report = parkingLots.stream().map(ParkingLot::report).reduce("", (a, b) -> a + "\n\t\t" + b);
+    public String getReport() {
+        String report = parkingLots.stream().map(ParkingLot::getReport).reduce("", (a, b) -> a + "\n\t\t" + b);
         return "Name: " + name + ", Count of ParkingLot: " + parkingLots.size() + ", Total FreeCount: " + getFreeCount()
                 + "\n\t" + "Embedded ParkingLot Reports: " + report;
     }

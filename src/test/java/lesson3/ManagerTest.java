@@ -41,6 +41,6 @@ public class ManagerTest {
                 "Embedded Waiter Reports: \n" +
                 "\tName: waiter, Count of ParkingLot: 1, Total FreeCount: 3\n" +
                 "\tEmbedded ParkingLot Reports: \n" +
-                "\t\tParkingLot Size: 3, Free Count: 3", manager.report());
+                "\t\tParkingLot Size: 3, Free Count: 3", manager.getReport());
     }
 }
